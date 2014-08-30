@@ -95,7 +95,7 @@ Heart.Game.prototype = {
     	this.pipes.forEachAlive(function(p){
         	p.body.velocity.x = 0;
     	}, 	this);
-    	this.game.score -= 1.0;
+    	this.game.score -= 0.5;
     	if (this.game.score < 0) this.game.score = 0;
 		this.labelScore.text = this.game.score.toFixed(1);
 		initScore = this.game.score;

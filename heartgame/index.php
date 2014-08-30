@@ -8,7 +8,7 @@
 <html>    
 <head>
   <meta charset="utf-8" />
-  <title>Flappy Heart</title>
+  <title>Leaps Of LOVE</title>
   <style type="text/css">
     body {
       background-color: #eee;
