@@ -49,6 +49,7 @@ class BitcoinFaucet
 
     function getLastTimeSent($address, $ip)
     {
+    	//if ($ip = "127.0.0.1") return;
         $stmt = $this->mysql->prepare("SELECT time FROM users WHERE `address` = ? OR `ip` = ? ORDER BY `id` DESC LIMIT 1");
         if(!($stmt && $stmt->bind_param("ss", $address, $ip) && $stmt->execute() && $stmt->store_result()))
         {
@@ -74,10 +75,10 @@ class BitcoinFaucet
         }
 	$stmt->free_result();
 	if($this->config['testing']) return "0000000000000T3STING000000000000000";
-        return $this->client->sendfrom($this->config['account_name'], $address, $amount);
+    return $this->client->sendfrom($this->config['account_name'], $address, $amount);
     }
 
-    public function drip($address, $ip)
+    public function check($address, $ip) 
     {
         if(!Bitcoin::checkAddress($address, $this->config['address_ver']))
             return 1;
@@ -86,14 +87,26 @@ class BitcoinFaucet
         if(time() - $last < $this->config['time_limit'])
             return 2;
 
-        srand(time());
-        $rand = $this->config['min_amount'] + mt_rand() / mt_getrandmax() * ($this->config['max_amount'] - $this->config['min_amount']);
-        $this->sent_amount = round($rand,1);
-        //$this->sent_amount = rand($this->config['min_amount'], $this->config['max_amount']);
-
         if($this->config['account_limit'] >= $this->config['balance'])
             return 3; // account empty
 
+        //address, ip OK
+        return 0;
+    }
+
+    public function drip($address, $ip, $amount=0)
+    {
+        $error = $this->check($address, $ip);
+        if ($error > 0) return $error;
+
+        if ($amount > 0) {
+            $this->sent_amount = $amount;
+        } else {
+            srand(time());
+            $rand = $this->config['min_amount'] + mt_rand() / mt_getrandmax() * ($this->config['max_amount'] - $this->config['min_amount']);
+            $this->sent_amount = round($rand,1);
+        }
+        
         $txid = $this->sendToAddress($address, $ip, $this->sent_amount );
         if(!$txid)
             return 4;
