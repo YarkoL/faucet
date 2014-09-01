@@ -10,6 +10,9 @@
   <meta charset="utf-8" />
   <title>Leaps Of LOVE</title>
   <style type="text/css">
+    p {
+    	font-family: Arial, Helvetica, sans-serif
+	}
     body {
       background-color: #eee;
     }
@@ -106,6 +109,9 @@ if(!isset($_SESSION['address'])) {
       </div> 
       <div align = "center">
         <p><?php echo $error ?></p>
+      </div>  
+      <div align = "center">
+        <p>Don't have a LOVE address?<br/><a href="http://lovecoins.info">Get the wallet here!</a></p>
       </div>            
   </form>
   </div>
