@@ -57,7 +57,7 @@ if(isset($_GET['address'])){
         $error = "The address you entered is invalid.";
         break;
       case 2:
-        $error = "Sorry, but you've already had coins in the last 12 hours.";
+        $error = "Sorry, but you've already had coins in the last 2 hours.";
         break;
       case 3:
         $error = "There aren't enough coins in the faucets wallet for us to drip you some.";

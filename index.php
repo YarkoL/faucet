@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
 					$error_msg = "The address you entered is invalid.";
 					break;
 				case 2:
-					$error_msg = "Sorry, but you've already had coins in the last 12 hours.";
+					$error_msg = "Sorry, but you've already had coins in the last 2 hours.";
 					break;
 				case 3:
 					$error_msg = "There aren't enough coins in the faucets wallet for us to drip you some.";

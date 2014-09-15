@@ -73,7 +73,7 @@ Heart.Game.prototype = {
 			if (i != hole && i != hole + 1 && i != hole - 1)
 				this.addPipe(400, i * 60);
 		}
-		this.game.score += 0.1;
+		this.game.score += 0.5;
 		this.labelScore.text = this.game.score.toFixed(1);
 	},
 
@@ -81,12 +81,7 @@ Heart.Game.prototype = {
     
     	if (this.heart.alive == false)
         	return;
-    	/*
-    	this.game.time.events.add(2000, function() {
-   		this.game.add.tween(hitText).to({y: 0}, 1500, Phaser.Easing.Linear.None, true);
-    	this.game.add.tween(hitText).to({alpha: 0}, 1500, Phaser.Easing.Linear.None, true);
-		}, this);
-		*/
+    	
     	this.heart.alive = false;
     	bounceSound.play();
    	 	this.game.time.events.remove(this.timer);
@@ -95,7 +90,7 @@ Heart.Game.prototype = {
     	this.pipes.forEachAlive(function(p){
         	p.body.velocity.x = 0;
     	}, 	this);
-    	this.game.score -= 0.5;
+    	this.game.score -= 2.5;
     	if (this.game.score < 0) this.game.score = 0;
 		this.labelScore.text = this.game.score.toFixed(1);
 		initScore = this.game.score;
